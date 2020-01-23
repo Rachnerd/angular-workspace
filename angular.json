@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "todos-web": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/todos-web",
+      "sourceRoot": "apps/todos-web/src",
+      "prefix": "angular-workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/todos-web",
+            "index": "apps/todos-web/src/index.html",
+            "main": "apps/todos-web/src/main.ts",
+            "polyfills": "apps/todos-web/src/polyfills.ts",
+            "tsConfig": "apps/todos-web/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/todos-web/src/favicon.ico",
+              "apps/todos-web/src/assets"
+            ],
+            "styles": ["apps/todos-web/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/todos-web/src/environments/environment.ts",
+                  "with": "apps/todos-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "todos-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "todos-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "todos-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/todos-web/tsconfig.app.json",
+              "apps/todos-web/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/todos-web/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/todos-web/jest.config.js",
+            "tsConfig": "apps/todos-web/tsconfig.spec.json",
+            "setupFile": "apps/todos-web/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "todos-web-e2e": {
+      "root": "apps/todos-web-e2e",
+      "sourceRoot": "apps/todos-web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/todos-web-e2e/cypress.json",
+            "tsConfig": "apps/todos-web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "todos-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "todos-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/todos-web-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/todos-web-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "todos-web"
+}
