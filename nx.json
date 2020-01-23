@@ -17,6 +17,9 @@
     "todos-web-e2e": {
       "tags": [],
       "implicitDependencies": ["todos-web"]
+    },
+    "components": {
+      "tags": []
     }
   }
 }

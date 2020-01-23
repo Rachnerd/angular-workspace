@@ -1,0 +1,16 @@
+<mat-sidenav-container class="side-bar__container" (backdropClick)="close()">
+  <mat-sidenav mode="over" [opened]="isOpen">Sidenav content</mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div class="side-bar__button" (click)="open()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">{{
+          'menu'
+          }}</mat-icon>
+      </div>
+      <span class="side-bar__toolbar-title">Todos</span>
+    </mat-toolbar>
+    <div class="side-bar__content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,14 @@
+.side-bar {
+  &__container {
+    height: 100%;
+  }
+  &__content {
+    padding: .5em;
+  }
+  &__button {
+    mat-icon {
+      cursor: pointer;
+    }
+    margin-right: 1em;
+  }
+}
